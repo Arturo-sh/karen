@@ -53,12 +53,31 @@
             font-size: 1.2em;
             font-style: italic;
             color: #FFFFFF;
+            text-align: center;
         }
         
         .frase:hover>blockquote {
             color: #FF0000;
             transition: all 0.6s ease;
         }
+        
+        .corazon {
+            display: inline-flex;
+        }
+        /* .frase:before {
+            animation: blinkNaim 500ms linear infinite;
+        } */
+        /* @keyframes blinkNaim {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        } */
         
         @media screen and (max-width: 600px) {
             #title {
@@ -78,7 +97,7 @@
 <body>
     <div id="container">
         <div id="main">
-            <h1 id="title">Para: Karen Yamilet</h1>
+            <h1 id="title">Para: Karen Yamilet <span class="corazon">♥</span></h1>
             <div class="box">
                 <p>Hola Karen, hice esta página para decirte algo muy importante, de antemano se que esta es la forma más cobarde de hacerlo pero en persona hubiese sido algo incomodo para mi, no se si me leeras, pero si lo haces, te quiero, te quiero mucho
                     y espero que no me odies por esto. Ultimamente he notado que te comportas diferente, al parecer estas entrando en otra relación y creo que debería alejarme, tengo que dejarte ir para que seas felíz. Durante el tiempo que hemos pasado
@@ -86,7 +105,7 @@
                     y simplemente no se como reaccionar, ahora se que lo aprendí de la manera incorrecta. A partir de hoy dejaré de formarme ideas tontas en mi mente y quiero proponerte que sigamos siendo amigos, quiero que nuestra amistad dure por siempre.
                     Solo me queda decir un par de cosas: disfruta la vida, disfruta de todos los bellos momentos con tus seres queridos, no apresures al tiempo, te deseo lo mejor :). Ya para terminar, si hay algo en esta vida que es completamente incierto
                     es el futuro por lo tanto, si es que algun día el destino nos vuelve a poner en el mismo camino estaré eternamente agradecido con la vida, y creeme que tratare de ser mejor persona, pero si eso no llega a suceder no te preocupes, trataré
-                    de buscar la felicidad en otro lado, si es que llegaste a leer hasta aquí muchisimas gracias, gracias por lo bellos momentos que has pasado conmigo, siempre los llevaré en mi mente, corazón y alma ♥
+                    de buscar la felicidad en otro lado, si es que llegaste a leer hasta aquí muchisimas gracias, gracias por lo bellos momentos que has pasado conmigo, siempre los llevaré en mi mente, corazón y alma <span class="corazon">♥</span>
                 </p>
             </div>
             <div class="box frase">
@@ -96,6 +115,29 @@
             </div>
         </div>
     </div>
+
+    <script>
+        flag = true;
+        frase = document.getElementsByClassName("frase")[0];
+        corazon = document.getElementsByClassName("corazon");
+
+        // Definicion de colores
+        colorRojo = "color: #FF0000; transition: all .5s ease;";
+        colorBlanco = "color: #FFFFFF; transition: all .5s ease;";
+        colorVerde = "color: lime; transition: all .5s ease;";
+        animacionCorazonUp = "scale: 1.6;";
+        animacionCorazonDown = "scale: 1;";
+
+
+        function reloj() {
+            flag ? corazon[0].style = colorVerde + animacionCorazonUp : corazon[0].style = colorBlanco + animacionCorazonDown;
+            flag ? corazon[1].style = colorRojo + animacionCorazonUp : corazon[1].style = colorBlanco + animacionCorazonDown;
+            flag ? frase.style = colorVerde : frase.style = colorRojo;
+            flag = !flag;
+        }
+
+        setInterval(reloj, 1000);
+    </script>
 </body>
 
 </html>
