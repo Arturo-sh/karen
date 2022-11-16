@@ -79,6 +79,15 @@
             }
         } */
         
+        .fondo-corazon {
+            font-size: 40px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 0;
+            opacity: 0.4;
+        }
+        
         @media screen and (max-width: 600px) {
             #title {
                 font-size: 1.5em;
@@ -115,25 +124,41 @@
             </div>
         </div>
     </div>
+    <div class="fondo-corazon">♥</div>
 
     <script>
         flag = true;
         frase = document.getElementsByClassName("frase")[0];
         corazon = document.getElementsByClassName("corazon");
-
-        // Definicion de colores
-        colorRojo = "color: #FF0000; transition: all .5s ease;";
-        colorBlanco = "color: #FFFFFF; transition: all .5s ease;";
-        colorVerde = "color: lime; transition: all .5s ease;";
-        animacionCorazonUp = "scale: 1.6;";
-        animacionCorazonDown = "scale: 1;";
-
+        f_corazon = document.getElementsByClassName("fondo-corazon");
 
         function reloj() {
-            flag ? corazon[0].style = colorVerde + animacionCorazonUp : corazon[0].style = colorBlanco + animacionCorazonDown;
-            flag ? corazon[1].style = colorRojo + animacionCorazonUp : corazon[1].style = colorBlanco + animacionCorazonDown;
-            flag ? frase.style = colorVerde : frase.style = colorRojo;
+            flag ? corazon[0].style = estilos("verde", "up") : corazon[0].style = estilos("blanco", "down");
+            flag ? corazon[1].style = estilos("rojo", "up") : corazon[1].style = estilos("blanco", "abajo");
+            flag ? f_corazon[0].style = estilos("rojo", "up_extra") : f_corazon[0].style = estilos("blanco", "abajo_extra");
+            flag ? frase.style = estilos("verde", "none") : frase.style = estilos("rojo", "none");
             flag = !flag;
+        }
+
+        function estilos(color, animacion) {
+            resultadoEstilo = "transition: all 0.6s ease;"; // Animacion y tiempo de transicion
+
+            const COLORES = { // Lista de los posibles colores que se pueden usar al llamar la funcion
+                "rojo": "color: #FF0000;",
+                "verde": "color: lime;",
+            }
+
+            const ANIMACIONES = { // Lista de las posibles animaciones que se pueden usar al llamar la funcion
+                "up": "scale: 1.4;",
+                "down": "scale: 1;",
+                "up_extra": "scale: 4;",
+                "abajo_extra": "scale: 3;",
+            }
+
+            resultadoEstilo += COLORES[color] || "color: #FFFFFF;";
+            resultadoEstilo += ANIMACIONES[animacion] || "scale: 1;";
+
+            return resultadoEstilo; // Devolvemos el estilo que se va a aplicar
         }
 
         setInterval(reloj, 1000);
